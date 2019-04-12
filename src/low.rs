@@ -25,6 +25,7 @@ pub enum Error {
 pub type Result<T> = ::std::result::Result<T, Error>;
 
 // Converts the raw status type to a `Result`.
+#[allow(clippy::if_same_then_else)]
 fn status_to_result<R>(status: raw::ffi_status, good: R) -> Result<R> {
     if status == raw::ffi_status_FFI_OK { Ok(good) }
     else if status == raw::ffi_status_FFI_BAD_TYPEDEF { Err(Error::Typedef) }
